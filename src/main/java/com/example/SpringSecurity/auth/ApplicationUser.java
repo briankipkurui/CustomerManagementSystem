@@ -20,6 +20,8 @@ import static javax.swing.UIManager.get;
 @NoArgsConstructor
 @Entity
 public class ApplicationUser  implements UserDetails {
+
+
     @SequenceGenerator(
             name = "student_sequence",
             sequenceName = "student_sequence",
@@ -40,10 +42,8 @@ public class ApplicationUser  implements UserDetails {
     private  String  location;
     @Enumerated(EnumType.STRING)
     ApplicationUserRole applicationUserRole;
-    private  boolean isAccountNonExpired = true;
-    private  boolean isAccountNonLocked = true;
-    private  boolean isCredentialsNonExpired = true;
-    private  boolean isEnabled = true;
+    private Boolean locked = false;
+    private  Boolean enabled = false;
 
     public ApplicationUser(String firstName,
                            String lastName,
@@ -119,7 +119,7 @@ public class ApplicationUser  implements UserDetails {
 
     @Override
     public boolean isAccountNonLocked() {
-        return true;
+        return !locked;
     }
 
     @Override
@@ -129,6 +129,6 @@ public class ApplicationUser  implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return enabled;
     }
 }
