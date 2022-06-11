@@ -1,0 +1,22 @@
+.hardware-tools{
+    height: 400px;
+    background-color:  #0B0B45 ;
+}
+.text-center{
+    color: #fff;
+}
+
+.hardware-tools .flex{
+    justify-content: space-between;
+}
+@media (max-width: 410px) {
+
+   .flex-items .card{
+        background-color: #fff;
+        border-radius: 10px;
+        padding: 10px;
+        margin: 5px;
+       flex-direction: row;
+
+    }
+}

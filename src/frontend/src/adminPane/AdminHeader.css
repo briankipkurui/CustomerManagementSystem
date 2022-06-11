@@ -1,0 +1,128 @@
+.adminNavbar{
+    background-color: #0B0B45;
+    color: #fff;
+    position: relative;
+    height: 70px;
+}
+.adminNavbar ul{
+    display: flex;
+   justify-items: center;
+}
+.adminNavbar li .nav-menu:hover{
+    border-bottom: 2px solid;
+}
+.adminNavbar li .nav-menu:focus{
+    border-bottom: 2px solid;
+}
+.adminNavbar a{
+    color: #fff;
+    padding: 10px;
+    font-size: 1.1rem;
+    margin: 0 30px;
+}
+.adminNavbar .nav-menu-dashboard{
+    background-color:rgba(255, 23, 255, 0.1);
+    border-radius: 20px;
+}
+
+.adminNavbar h1{
+    display: none;
+}
+.menu-icon{
+    display: none;
+}
+@media(max-width: 1055px){
+    .adminNavbar a{
+        margin: 0 20px;
+    }
+}
+@media(max-width: 942px){
+    .adminNavbar a{
+        margin: 0 10px;
+    }
+}
+@media(max-width: 818px){
+    .adminNavbar a{
+        margin: 5px;
+    }
+}
+
+@media(max-width: 757px){
+    .adminNavbar a{
+        margin: 0;
+    }
+}
+
+@media(max-width: 695px){
+    .adminNavbar ul{
+        display: none;
+
+    }
+    .adminNavbar h1{
+        display: flex;
+    }
+    .adminNavbar .menu-icon{
+      display: flex;
+      margin-left: 500px;
+
+    }
+
+}
+
+
+@media(max-width: 675px){
+
+    .adminNavbar .menu-icon{
+        display: flex;
+        margin-left: 450px;
+
+    }
+
+}
+@media(max-width: 623px){
+
+    .adminNavbar .menu-icon{
+        display: flex;
+        margin-left: 400px;
+
+    }
+
+}
+@media(max-width: 575px){
+
+    .adminNavbar .menu-icon{
+        display: flex;
+        margin-left: 350px;
+
+    }
+
+}
+
+@media(max-width: 528px){
+
+    .adminNavbar .menu-icon{
+        display: flex;
+        margin-left: 300px;
+
+    }
+
+}
+@media(max-width: 473px){
+
+    .adminNavbar .menu-icon{
+        display: flex;
+        margin-left: 270px;
+
+    }
+
+}
+@media(max-width: 410px){
+
+    .adminNavbar .menu-icon{
+        display: flex;
+        margin-left: 200px;
+
+    }
+
+}
+

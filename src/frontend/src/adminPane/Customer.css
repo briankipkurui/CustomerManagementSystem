@@ -1,0 +1,23 @@
+.search-bar{
+    color: #7cb305;
+    position: relative;
+    width: 600px;
+    margin: 10px auto;
+
+}
+.search-bar input[type='Text']{
+    width: 100%;
+    box-sizing: border-box;
+    padding: 12px 20px;
+    border-radius: 20px;
+    border: 1px #0B0B45 solid;
+
+}
+/*table section*/
+
+.table-section{
+    height: 400px;
+  background-color: #fff;
+    margin-top: 20px;
+}
+

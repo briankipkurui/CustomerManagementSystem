@@ -18,4 +18,12 @@ public interface ApplicationUserDao extends JpaRepository<ApplicationUser, Long>
     @Query("UPDATE ApplicationUser a " +
             "SET a.enabled = TRUE WHERE a.email = ?1")
     int enableApplicationUser(String email);
+
+   @Transactional(readOnly = true)
+    @Query("SELECT s From ApplicationUser" +
+            " s WHERE s.phoneNumber =?1")
+    Optional<ApplicationUser> findByPhoneNumber(String phoneNumber);
+
+    Optional<ApplicationUser> findByIdentificationNo(String identificationNo);
+
 }

@@ -1,5 +1,6 @@
 package com.example.SpringSecurity.auth;
 
+import com.example.SpringSecurity.exeception.CustomerNotFoundException;
 import com.example.SpringSecurity.registration.token.ConfirmationToken;
 import com.example.SpringSecurity.registration.token.ConfirmationTokenService;
 import com.example.SpringSecurity.security.PasswordConfig;
@@ -10,6 +11,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -19,6 +22,7 @@ public class ApplicationUserService  implements UserDetailsService {
     private final ApplicationUserDao applicationUserDao;
     private  final PasswordConfig passwordConfig;
     private final ConfirmationTokenService confirmationTokenService;
+
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
@@ -35,6 +39,20 @@ public class ApplicationUserService  implements UserDetailsService {
         if (userExist) {
             throw new IllegalStateException("email already taken");
         }
+        boolean phoneNumberExist = applicationUserDao
+                .findByPhoneNumber(applicationUser.getPhoneNumber())
+                .isPresent();
+        if (phoneNumberExist){
+            throw new IllegalStateException("phone number already exist");
+        }
+        boolean identificationNumberExist = applicationUserDao
+                .findByIdentificationNo(applicationUser.getIdentificationNo())
+                .isPresent();
+
+        if(identificationNumberExist){
+            throw new IllegalStateException("identificationNumber already exist");
+        }
+
         String encodePassword = passwordConfig.bCryptPasswordEncoder()
                 .encode(applicationUser.getPassword());
 
@@ -50,6 +68,7 @@ public class ApplicationUserService  implements UserDetailsService {
                LocalDateTime.now().plusMinutes(15),
                applicationUser
         );
+
         confirmationTokenService.saveConfirmationToken(confirmationToken);
         //  TODO SEND EMAIL
         return token;
@@ -57,6 +76,34 @@ public class ApplicationUserService  implements UserDetailsService {
     public int enableApplicationUser(String email) {
         return applicationUserDao.enableApplicationUser(email);
     }
+    public Optional<ApplicationUser> getUsername(String email){
+        return applicationUserDao.findByEmail(email);
+    }
 
 
+    public List<ApplicationUser> getAllStudents() {
+        return applicationUserDao.findAll();
+    }
+
+    public void deleteCustomer(Long id) {
+        if(!applicationUserDao.existsById(id)){
+          throw new CustomerNotFoundException(
+            "customer with"+id+"does not exist"
+          );
+        }
+     applicationUserDao.deleteById(id);
+
+    }
+    public Optional<ApplicationUser> getPhoneNumber(String phoneNumber){
+        return applicationUserDao.findByPhoneNumber(phoneNumber);
+    }
+
+
+    public ApplicationUser getApplicationUserById(Long id) {
+        return getAllStudents()
+                .stream()
+                .filter(ApplicationUser -> ApplicationUser.getId().equals(id))
+                .findFirst()
+                .orElseThrow(()-> new IllegalStateException("customer with "+id+ " was not found"));
+    }
 }

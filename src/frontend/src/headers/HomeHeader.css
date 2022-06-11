@@ -1,0 +1,175 @@
+/*@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap');*/
+
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+body{
+    font-family: 'Lato', sans-serif;
+    color: #333;
+    line-height: 1.6;
+
+}
+
+ul{
+    list-style-type: none;
+}
+
+a{
+    text-decoration: none;
+    color: #333;
+}
+
+h1,
+h2{
+    font-weight: 300;
+    line-height: 1.2;
+    margin: 10px 0;
+}
+
+p{
+    margin: 10px 0;
+}
+
+img{
+    width: 100px;
+}
+
+.navbar{
+    background-color:   #0B0B45;
+    color: #fff;
+    /*height: 90px;*/
+    position: relative;
+}
+.logo{
+    color: #fff;
+    margin: 20px;
+}
+
+.navbar ul{
+    display: flex;
+}
+
+.navbar a {
+    color: #fff;
+    padding: 10px;
+    margin:  0 5px;
+    font-size: 1.1rem;
+}
+.navbar a:hover{
+    border-bottom: 2px solid;
+}
+.navbar .flex{
+    justify-content: space-between;
+}
+/*Home page*/
+
+.showcase{
+    height: 400px;
+    background-color: #0B0B45 ;
+    color: #fff;
+}
+.showcase h1{
+    font-size: 40px;
+    color: #fff;
+}
+.showcase p{
+    margin: 20px 0;
+}
+
+.showcase .grid{
+    grid-template-columns: 50% 45%;
+    gap: 30px;
+}
+
+.showcase-form{
+    position: relative;
+    top: 40px;
+    height: 250px;
+    padding: 40px;
+    justify-self: flex-end;
+}
+.showcase-form  img{
+   height: 150px;
+   width: 250px;
+}
+
+/*products*/
+.hardware-tools .flex{
+    flex-wrap: wrap;
+}
+
+/*footer*/
+
+/*utilities*/
+.container{
+    max-width: 1100px;
+    margin:0 auto;
+    overflow: auto;
+    padding: 0 40px;
+}
+
+.card{
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 10px;
+}
+.flex{
+    display: flex;
+    /*justify-content: center;*/
+    align-items: center;
+    /*flex-direction: row;*/
+    height: 100%;
+}
+.grid{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 50px;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+@media(max-width: 670px){
+ .showcase .grid{
+     grid-template-columns: 1fr;
+ }
+  .showcase-text h1,
+  .showcase-text p{
+      text-align: center;
+  }
+  .showcase-form img{
+      width: 400px;
+      height: 200px;
+  }
+
+}
+@media(max-width: 470px) {
+    .navbar{
+        background-color: #0B0B45;
+        height: 110px;
+    }
+    .showcase .grid{
+        grid-template-columns: 1fr;
+    }
+    .navbar .flex{
+        flex-direction: column;
+    }
+    .navbar ul{
+        padding: 10px;
+        background-color: rgba(24, 24, 24,0.5);
+    }
+    .navbar a:hover{
+        border-bottom: 2px solid;
+    }
+
+}
+
+@media(max-width: 370px){
+    .showcase-form img{
+        width: 200px;
+        height: 250px;
+    }
+}

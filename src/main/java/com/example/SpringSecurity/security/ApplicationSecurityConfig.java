@@ -5,9 +5,11 @@ import com.example.SpringSecurity.auth.ApplicationUserService;
 import com.example.SpringSecurity.jwt.JwtTokenVerifier;
 import com.example.SpringSecurity.jwt.JwtUsernameAndPasswordAuthenticationFilter;
 import lombok.AllArgsConstructor;
+import org.aspectj.weaver.ast.And;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -35,20 +37,25 @@ public class ApplicationSecurityConfig  extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
-                .csrf().disable()
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+
+                JwtUsernameAndPasswordAuthenticationFilter jwtUsernameAndPasswordAuthenticationFilter =
+                new JwtUsernameAndPasswordAuthenticationFilter(authenticationManagerBean());
+                jwtUsernameAndPasswordAuthenticationFilter.setFilterProcessesUrl("/api/v1/registration/login");
+                http.csrf().disable();
+
+                http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .addFilter(new JwtUsernameAndPasswordAuthenticationFilter(authenticationManager()))
+                        .addFilter(jwtUsernameAndPasswordAuthenticationFilter)
                 .addFilterAfter(new JwtTokenVerifier(),JwtUsernameAndPasswordAuthenticationFilter.class)
                 .authorizeRequests()
                 .antMatchers("/", "index", "/css/*", "/js/*")
                 .permitAll()
                 .antMatchers("/api/v*/registration/**")
                 .permitAll()
-                .antMatchers("/management/api/v1/students/**")
+                .antMatchers("/management/api/v1/customer/**")
                 .permitAll()
-                .antMatchers("/api/**").hasRole(STUDENT.name())
+                .antMatchers("/api/**").hasRole(CUSTOMER.name())
                 .anyRequest()
                 .authenticated();
 
@@ -67,5 +74,11 @@ public class ApplicationSecurityConfig  extends WebSecurityConfigurerAdapter {
         provider.setUserDetailsService(applicationUserService);
         return provider;
 
+    }
+
+    @Override
+    @Bean
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
     }
 }

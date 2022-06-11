@@ -1,8 +1,8 @@
 package com.example.SpringSecurity.security;
 
 public enum ApplicationUserPermission {
-    STUDENT_READ("student:read"),
-    STUDENT_WRITE("student:write"),
+    CUSTOMER_READ("customer:read"),
+    CUSTOMER_WRITE("customer:write"),
     COURSE_READ("course:read"),
     COURSE_WRITE("course:write");
 
